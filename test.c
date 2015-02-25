@@ -8,7 +8,7 @@ typedef struct node
     struct node *next;
     struct node *prev;
     char name[60];
-    int number;
+    char number[10];
 }node;
 
 
@@ -50,7 +50,7 @@ void insert(node **root)
     //printf("%s",newNode -> name);
 
     printf("Enter Number");
-    scanf("%d", &newNode -> number);
+    scanf("%s", newNode -> number);
 
     //printf("%s: %d", newNode->name, newNode->number);
     //printf("hello \n");
@@ -76,7 +76,7 @@ void insert(node **root)
             else break ;
         }
 
-         printf("%d", ch);
+         //printf("%d", ch);
 
         if (!temp)  // When we traversed complete list
         {
@@ -104,7 +104,7 @@ void display(node *root)
 {
     while(root)
     {
-        printf("%s %d\n", root -> name, root -> number);
+        printf("%s %s\n", root -> name, root -> number);
         root = root -> next;
     }
 }
@@ -166,7 +166,7 @@ void search(node *root)
     {
         if (strcmp(contactName, temp -> name) == 0)
         {
-            printf("%s : %d", contactName, temp -> number);
+            printf("%s : %s", contactName, temp -> number);
             return;
         }
         temp = temp -> next;
@@ -177,7 +177,7 @@ void search(node *root)
 int main()
 {
     node *dir = NULL;
-    int ch ;
+    int ch, y = 9 ;
 
     printf("Enter 1. for insertion \n 2. for search \n 3. for display \n 4.for Deletion");
     scanf("%d", &ch);
@@ -185,8 +185,15 @@ int main()
     switch(ch)
     {
 
-        case 1 : insert(&dir);
-            break;
+        case 1 : {
+					while (y==9)
+					{
+						insert(&dir);
+						printf("press 9 to insert again else any number other than 9");
+						scanf("%d", &y);
+					}
+					break;
+				}
 
         case 2: search(dir);
             break;
